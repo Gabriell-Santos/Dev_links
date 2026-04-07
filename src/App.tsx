@@ -1,9 +1,21 @@
-function App() {
-  return (
-    <div>
-      <h1> Ola app</h1>
-    </div>
-  );
-}
+import { createBrowserRouter } from "react-router-dom";
+import { Home } from "./Pages/Home";
+import { Admin } from "./Pages/Admin";
+import { NetWords } from "./Pages/NetWords";
 
-export default App;
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
+  },
+  {
+    path: "/admin/social",
+    element: <NetWords />,
+  },
+]);
+
+export { router };
