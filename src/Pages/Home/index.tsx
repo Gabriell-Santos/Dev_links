@@ -1,3 +1,6 @@
+import { Social } from "../../Components/Social";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+
 export function Home() {
   return (
     <div className="flex flex-col w-full py-4 items-center justify-center">
@@ -11,6 +14,17 @@ export function Home() {
             <a> Canal no Youtube </a>
           </p>
         </section>
+        <footer className="flex gap-1.5 my-1 justify-center ">
+          <Social url="https://www.youtube.com">
+            <FaFacebook size={35} color="white" />
+          </Social>
+          <Social url="https://www.youtube.com">
+            <FaInstagram size={35} color="white" />
+          </Social>
+          <Social url="https://www.youtube.com">
+            <FaYoutube size={35} color="white" />
+          </Social>
+        </footer>
       </main>
     </div>
   );
