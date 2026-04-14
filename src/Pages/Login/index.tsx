@@ -1,17 +1,33 @@
 import { useState } from "react";
 import { Input } from "../../Components/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../Services/ConnectionFirebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 export function Login() {
+  // Chamando o useNavigate
+  const navigate = useNavigate();
   // Chamando o useState
   const [email, setEmail] = useState("");
   const [passWord, setPassWord] = useState("");
   // Função para lidar com o submit do formulário
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log({
-      email: email,
-      passWord: passWord,
-    });
+    if (email === "" || passWord === "") {
+      alert("Preencha todos os campos");
+      return;
+    }
+    signInWithEmailAndPassword(auth, email, passWord)
+      .then(() => {
+        alert("Login realizado com sucesso");
+        console.log({
+          email: email,
+          YourPassWord: passWord,
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <div className="flex w-full h-screen justify-center items-center flex-col">
