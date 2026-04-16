@@ -3,6 +3,7 @@ import { Input } from "../../Components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../Services/ConnectionFirebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
 export function Login() {
   // Chamando o useNavigate
   const navigate = useNavigate();
@@ -19,16 +20,13 @@ export function Login() {
     signInWithEmailAndPassword(auth, email, passWord)
       .then(() => {
         alert("Login realizado com sucesso");
-        console.log({
-          email: email,
-          YourPassWord: passWord,
-        });
         navigate("/");
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
   return (
     <div className="flex w-full h-screen justify-center items-center flex-col">
       <Link to={"/"}>
