@@ -2,6 +2,7 @@ import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { auth } from "../../Services/ConnectionFirebase";
 import { signOut } from "firebase/auth";
+import { Input } from "../Input";
 export function Header() {
   // função para deslogar o usuário
   async function handleLogOut() {
