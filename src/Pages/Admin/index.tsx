@@ -1,4 +1,5 @@
 import { Input } from "../../Components/Input";
+import { FiTrash } from "react-icons/fi";
 import { Header } from "../../Components/Header";
 import { useState } from "react";
 export function Admin() {
@@ -50,24 +51,41 @@ export function Admin() {
             />
           </div>
         </section>
-        <div className=" flex items-center  justify-center flex-col mb-7 p-1 border-2 border-gray-500 rounded-lg mt-8 pb-5 ">
-          <label className=" text-white font-bold mt-4 py-2 text-lg">
-            Veja como está ficando seu link
-          </label>
-          <article
-            className="w-11/12 max-w-lg flex flex-col items-center justify-center gap-2 px-3 py-4 text-xl rounded-2xl"
-            style={{
-              marginBottom: 8,
-              marginTop: 8,
-              backgroundColor: backgroundColor,
-            }}
-          >
-            <p className="text-2 " style={{ color: textColor }}>
-              Canal no Youtube
-            </p>
-          </article>
-        </div>
+        {nameInput !== "" && (
+          <div className=" flex items-center  justify-center flex-col mb-7 p-1 border-2 border-gray-500 rounded-lg mt-8 pb-5 ">
+            <label className=" text-white font-bold mt-4 py-2 text-lg">
+              Veja como está ficando seu link
+            </label>
+            <article
+              className="w-11/12 max-w-lg flex flex-col items-center justify-center gap-2 px-3 py-4 text-xl rounded-2xl"
+              style={{
+                marginBottom: 8,
+                marginTop: 8,
+                backgroundColor: backgroundColor,
+              }}
+            >
+              <p className="text-2 " style={{ color: textColor }}>
+                {nameInput}
+              </p>
+            </article>
+          </div>
+        )}
+        <button
+          type="submit"
+          className="bg-indigo-500 py-2 rounded-2xl font-bold text-lg mt-4 mb-4 items-center justify-center flex"
+        >
+          Cadastrar
+        </button>
       </form>
+      <h2 className="text-3xl font-bold mb-2 mt-1 text-amber-50">Meus Links</h2>
+      <section className="flex items-center justify-between w-11/12 max-w-lg rounded-lg mt-3 py-2.5 px-1.5 border bg-blue-200  text-black font-medium select-none cursor-pointer">
+        <p> Canal do youtube </p>
+        <div>
+          <button className="bg-neutral-800 border border-dotted rounded-lg p-1 cursor-pointer">
+            <FiTrash size={25} color="white" />
+          </button>
+        </div>
+      </section>
     </div>
   );
 }
