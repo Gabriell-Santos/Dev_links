@@ -1,4 +1,13 @@
 import { Input } from "../../Components/Input";
+import { db } from "../../Services/ConnectionFirebase";
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  onSnapshot,
+  doc,
+  Query,
+} from "firebase/firestore";
 import { FiTrash } from "react-icons/fi";
 import { Header } from "../../Components/Header";
 import { useState } from "react";
@@ -8,10 +17,38 @@ export function Admin() {
   const [textColor, setTextColor] = useState("#ffffff");
   const [backgroundColor, setBackgroundColor] = useState("#000000");
 
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    // Verificar se os campos estão preenchidos
+    if (nameInput === "" || urlInput === "") {
+      alert("Por favor, preencha todos os campos.");
+      return;
+    }
+    // Adicionar o link ao Firestore
+    try {
+      const docRef = await addDoc(collection(db, "Links"), {
+        name: nameInput,
+        url: urlInput,
+        bg: backgroundColor,
+        color: textColor,
+        data: new Date(),
+      });
+      // Limpar os campos após o envio
+      alert("Link adicionado com sucesso!");
+      setNameInput("");
+      setUrlInput("");
+    } catch (error) {
+      console.error("Erro ao adicionar link: ", error);
+    }
+  }
+
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2">
       <Header />
-      <form className="flex flex-col mt-8 w-full max-w-xl mb-3  ">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col mt-8 w-full max-w-xl mb-3  "
+      >
         <label className=" text-lg text-white font-bold mt-3 ">
           Nome do Link
         </label>
