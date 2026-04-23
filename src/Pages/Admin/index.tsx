@@ -7,15 +7,45 @@ import {
   onSnapshot,
   doc,
   Query,
+  orderBy,
+  query,
 } from "firebase/firestore";
 import { FiTrash } from "react-icons/fi";
 import { Header } from "../../Components/Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export function Admin() {
   const [nameInput, setNameInput] = useState("");
   const [urlInput, setUrlInput] = useState("");
   const [textColor, setTextColor] = useState("#ffffff");
   const [backgroundColor, setBackgroundColor] = useState("#000000");
+  const [links, setLinks] = useState<LinkProps[]>([]);
+  interface LinkProps {
+    id: string;
+    name: string;
+    url: string;
+    bg: string;
+    color: string;
+  }
+  // Buscar os links do Firestore quando o componente for montado
+  useEffect(() => {
+    const LinkRef = collection(db, "Links");
+    const queryRef = query(LinkRef, orderBy("data", "desc"));
+    const unsub = onSnapshot(queryRef, (snapshot) => {
+      const lista: LinkProps[] = [];
+      snapshot.forEach((doc) => {
+        lista.push({
+          id: doc.data().id,
+          name: doc.data().name,
+          url: doc.data().url,
+          bg: doc.data().bg,
+          color: doc.data().color,
+        });
+      });
+      setLinks(lista);
+    });
+    // Limpar o listener quando o componente for desmontado
+    return () => unsub();
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
