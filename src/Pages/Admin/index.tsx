@@ -160,7 +160,7 @@ export function Admin() {
           <p> {item.name} </p>
           <div>
             <button
-              className="bg-neutral-800 border border-dotted rounded-lg p-1 cursor-pointer"
+              className="bg-neutral-800 border border-dotted rounded-lg p-2 cursor-pointer"
               onClick={() => handleDelete(item.id)}
             >
               <FiTrash size={25} color="white" />
