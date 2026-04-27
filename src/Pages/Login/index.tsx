@@ -13,7 +13,7 @@ export function Login() {
   // Função para lidar com o submit do formulário
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (email === "" || passWord === "") {
+    if (email.trim() === "" || passWord.trim() === "") {
       alert("Preencha todos os campos");
       return;
     }
