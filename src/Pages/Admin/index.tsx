@@ -34,7 +34,7 @@ export function Admin() {
       const lista: LinkProps[] = [];
       snapshot.forEach((doc) => {
         lista.push({
-          id: doc.data().id,
+          id: doc.id,
           name: doc.data().name,
           url: doc.data().url,
           bg: doc.data().bg,
@@ -50,7 +50,7 @@ export function Admin() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     // Verificar se os campos estão preenchidos
-    if (nameInput === "" || urlInput === "") {
+    if (nameInput.trim() === "" || urlInput.trim() === "") {
       alert("Por favor, preencha todos os campos.");
       return;
     }
@@ -70,6 +70,12 @@ export function Admin() {
     } catch (error) {
       console.error("Erro ao adicionar link: ", error);
     }
+  }
+
+  // Função para deletar um link
+  async function handleDelete(id: string) {
+    const docRef = doc(db, "Links", id);
+    await deleteDoc(docRef);
   }
 
   return (
@@ -145,14 +151,23 @@ export function Admin() {
         </button>
       </form>
       <h2 className="text-3xl font-bold mb-2 mt-1 text-amber-50">Meus Links</h2>
-      <section className="flex items-center justify-between w-11/12 max-w-lg rounded-lg mt-3 py-2.5 px-1.5 border bg-blue-200  text-black font-medium select-none cursor-pointer">
-        <p> Canal do youtube </p>
-        <div>
-          <button className="bg-neutral-800 border border-dotted rounded-lg p-1 cursor-pointer">
-            <FiTrash size={25} color="white" />
-          </button>
-        </div>
-      </section>
+      {links.map((item) => (
+        <section
+          key={item.id}
+          style={{ background: item.bg, color: item.color }}
+          className="flex items-center justify-between w-11/12 max-w-lg rounded-lg mt-3 py-2.5 px-1.5 border bg-blue-200  text-black font-medium select-none cursor-pointer"
+        >
+          <p> {item.name} </p>
+          <div>
+            <button
+              className="bg-neutral-800 border border-dotted rounded-lg p-1 cursor-pointer"
+              onClick={() => handleDelete(item.id)}
+            >
+              <FiTrash size={25} color="white" />
+            </button>
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
