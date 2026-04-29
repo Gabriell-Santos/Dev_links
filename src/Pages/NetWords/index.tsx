@@ -1,12 +1,27 @@
 import { Header } from "../../Components/Header";
 import { Input } from "../../Components/Input";
 import { db } from "../../Services/ConnectionFirebase";
-import { setDoc, doc } from "firebase/firestore";
-import { useState } from "react";
+import { setDoc, doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
 export function NetWords() {
   const [facebook, setFacebook] = useState<string>("");
   const [instagram, setInstagram] = useState<string>("");
   const [youtube, setYoutube] = useState<string>("");
+
+  // Buscar os links do Firestore quando o componente for montado
+  useEffect(() => {
+    function loadLinks() {
+      const docRef = doc(db, "Social", "Rede");
+      getDoc(docRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          setFacebook(snapshot.data()?.facebook);
+          setInstagram(snapshot.data()?.instagram);
+          setYoutube(snapshot.data()?.youtube);
+        }
+      });
+    }
+    loadLinks();
+  }, []);
 
   // Função para lidar com o envio do formulário
   function handleSubmit(e: React.FormEvent) {

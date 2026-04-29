@@ -4,10 +4,15 @@ import { Admin } from "./Pages/Admin";
 import { Login } from "./Pages/Login";
 import { NetWords } from "./Pages/NetWords";
 import { Private } from "./Routes/Private";
+import { NotFound } from "./Pages/Error";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Private>
+        <Home />
+      </Private>
+    ),
   },
   {
     path: "/login",
@@ -28,6 +33,10 @@ const router = createBrowserRouter([
         <NetWords />
       </Private>
     ),
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
