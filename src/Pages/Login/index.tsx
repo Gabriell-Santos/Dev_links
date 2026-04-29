@@ -3,6 +3,7 @@ import { Input } from "../../Components/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../Services/ConnectionFirebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export function Login() {
   // Chamando o useNavigate
@@ -14,12 +15,12 @@ export function Login() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (email.trim() === "" || passWord.trim() === "") {
-      alert("Preencha todos os campos");
+      toast.error("Preencha todos os campos");
       return;
     }
     signInWithEmailAndPassword(auth, email, passWord)
       .then(() => {
-        alert("Login realizado com sucesso");
+        toast.success("Login realizado com sucesso");
         navigate("/");
       })
       .catch((error) => {

@@ -12,6 +12,7 @@ import {
 import { FiTrash } from "react-icons/fi";
 import { Header } from "../../Components/Header";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 export function Admin() {
   const [nameInput, setNameInput] = useState("");
   const [urlInput, setUrlInput] = useState("");
@@ -50,7 +51,7 @@ export function Admin() {
     e.preventDefault();
     // Verificar se os campos estão preenchidos
     if (nameInput.trim() === "" || urlInput.trim() === "") {
-      alert("Por favor, preencha todos os campos.");
+      toast.error("Por favor, preencha todos os campos.");
       return;
     }
     // Adicionar o link ao Firestore
@@ -63,7 +64,7 @@ export function Admin() {
         data: new Date(),
       });
       // Limpar os campos após o envio
-      alert("Link adicionado com sucesso!");
+      toast.success("Link adicionado com sucesso!");
       setNameInput("");
       setUrlInput("");
     } catch (error) {
@@ -75,6 +76,7 @@ export function Admin() {
   async function handleDelete(id: string) {
     const docRef = doc(db, "Links", id);
     await deleteDoc(docRef);
+    toast.success("Link deletado com Sucesso");
   }
 
   return (

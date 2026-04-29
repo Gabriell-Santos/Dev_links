@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { auth } from "../../Services/ConnectionFirebase";
 import { signOut } from "firebase/auth";
 import { Input } from "../Input";
+import { toast } from "react-toastify";
 export function Header() {
   // função para deslogar o usuário
   async function handleLogOut() {
     await signOut(auth);
+    toast.info("Você saiu da conta!");
   }
 
   return (

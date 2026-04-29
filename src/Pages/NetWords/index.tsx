@@ -3,6 +3,7 @@ import { Input } from "../../Components/Input";
 import { db } from "../../Services/ConnectionFirebase";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 export function NetWords() {
   const [facebook, setFacebook] = useState<string>("");
   const [instagram, setInstagram] = useState<string>("");
@@ -31,7 +32,7 @@ export function NetWords() {
       instagram.trim() === "" ||
       youtube.trim() === ""
     ) {
-      alert("Por favor, preencha todos os campos.");
+      toast.error("Por favor, preencha todos os campos.");
       return;
     }
     setDoc(doc(db, "Social", "Rede"), {
@@ -40,7 +41,7 @@ export function NetWords() {
       youtube: youtube,
     })
       .then(() => {
-        alert("Links salvos com sucesso!");
+        toast.success("Links salvos com sucesso!");
       })
       .catch((error) => {
         console.log(error);
