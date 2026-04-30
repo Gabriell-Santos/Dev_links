@@ -12,7 +12,7 @@ DevLink é uma aplicação web que permite criar e gerenciar sua página de link
 ## 📸 Demonstração
 
 <div align="center">
-  <img src="./tela.png" alt="Preview do DevLink" width="900">
+ <img src="https://raw.githubusercontent.com/Gabriell-Santos/Dev_links/master/Captura%20de%20tela%202026-04-30%20124027.png" alt="Preview do DevLink" width="900">
   <br>
   <em>Tela principal da aplicação com listagem de links</em>
 </div>
