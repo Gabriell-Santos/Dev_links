@@ -1,73 +1,92 @@
-# React + TypeScript + Vite
+# 🔗 DevLink
+### Gerencie e compartilhe seus links em um só lugar!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 
-Currently, two official plugins are available:
+DevLink é uma aplicação web que permite criar e gerenciar sua página de links personalizada, com autenticação real via Firebase e **preview em tempo real** enquanto você monta seus links.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📸 Demonstração
 
-## React Compiler
+<div align="center">
+  <img src="./tela.png" alt="Preview do DevLink" width="900">
+  <br>
+  <em>Tela principal da aplicação com listagem de links</em>
+</div>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Funcionalidades
 
-## Expanding the ESLint configuration
+| Funcionalidade | Descrição |
+|----------------|-----------|
+| 🔐 **Autenticação Firebase** | Cadastro e login com e-mail e senha, sessão persistente entre visitas |
+| 🏠 **Página Home** | Visão geral de todos os links cadastrados pelo usuário logado |
+| 🔗 **Criação de links** | Adicione links com nome, URL e cor de fundo customizável |
+| 👁️ **Preview em tempo real** | Veja o card do link renderizado enquanto preenche o formulário |
+| 🔔 **Notificações Toastify** | Feedback visual instantâneo para cada ação (sucesso, erro, alerta) |
+| 🧭 **Rotas privadas** | Páginas protegidas que redirecionam para login caso não autenticado |
+| 📱 **Design responsivo** | Interface adaptada para desktop e mobile com Tailwind CSS |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🔒 Rotas da aplicação
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Rota | Descrição | Acesso |
+|------|-----------|--------|
+| `/` | Página de login e cadastro | Público |
+| `/home` | Home com listagem dos links do usuário | Privado |
+| `/links` | Criar e gerenciar links | Privado |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tecnologias utilizadas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Tecnologia | Finalidade |
+|------------|-----------|
+| React | Interface de usuário |
+| TypeScript | Tipagem estática e segurança no código |
+| Tailwind CSS | Estilização com classes utilitárias |
+| React Router DOM | Navegação entre páginas |
+| Firebase Authentication | Autenticação de usuários |
+| Cloud Firestore | Banco de dados para armazenar os links |
+| React Toastify | Notificações customizadas |
+| Vite | Build rápida e ambiente de desenvolvimento |
+
+## 📦 Como executar o projeto
+
+### Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- npm ou yarn
+- Uma conta no [Firebase](https://firebase.google.com/)
+
+### Passo a passo
+
+```bash
+# Clone o repositório
+git clone https://github.com/seu-usuario/devlink.git
+
+# Acesse a pasta do projeto
+cd devlink
+
+# Instale as dependências
+npm install
+
+# Execute o projeto em modo desenvolvimento
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Configuração do Firebase
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Acesse o [Firebase Console](https://console.firebase.google.com/), crie um projeto, ative o **Authentication** (e-mail/senha) e o **Firestore Database**.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Crie o arquivo `.env` na raiz do projeto com suas credenciais:
+
+```env
+VITE_API_KEY=sua_api_key
+VITE_AUTH_DOMAIN=seu_auth_domain
+VITE_PROJECT_ID=seu_project_id
+VITE_STORAGE_BUCKET=seu_storage_bucket
+VITE_MESSAGING_SENDER_ID=seu_sender_id
+VITE_APP_ID=seu_app_id
 ```
+
+> ⚠️ Nunca suba o arquivo `.env` para o repositório. Ele já está no `.gitignore`.
